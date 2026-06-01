@@ -2,19 +2,19 @@
 #ifndef INCLUDE_BST_H_
 #define INCLUDE_BST_H_
 
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 
 template<typename T>
 class BST {
-private:
+ private:
   struct Node {
     T key;
     int count;
     Node* left;
     Node* right;
 
-    Node(const T& k) : key(k), count(1), left(nullptr), right(nullptr) {}
+    explicit Node(const T& k) : key(k), count(1), left(nullptr), right(nullptr) {}
   };
 
   Node* root;
@@ -75,17 +75,17 @@ private:
     }
   }
 
-public:
+ public:
   BST() : root(nullptr) {}
-  
+
   ~BST() {
     destroy(root);
   }
-  
+
   BST(const BST& other) : root(nullptr) {
     root = copyTree(other.root);
   }
-  
+
   BST& operator=(const BST& other) {
     if (this != &other) {
       destroy(root);
@@ -103,6 +103,7 @@ public:
   }
 
   int depth() const {
+    if (!root) return 0;
     return depth(root) - 1;
   }
 

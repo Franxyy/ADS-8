@@ -41,14 +41,14 @@ private:
     }
   }
 
-  bool search(const Node* node, const T& value) const {
-    if (!node) return false;
+  int search(const Node* node, const T& value) const {
+    if (!node) return 0;
     if (value < node->key) {
       return search(node->left, value);
     } else if (value > node->key) {
       return search(node->right, value);
     } else {
-      return true;
+      return node->count;
     }
   }
 
@@ -64,14 +64,6 @@ private:
     newNode->left = copyTree(node->left);
     newNode->right = copyTree(node->right);
     return newNode;
-  }
-
-  void inorder(const Node* node) const {
-    if (node) {
-      inorder(node->left);
-      std::cout << node->key << ": " << node->count << std::endl;
-      inorder(node->right);
-    }
   }
 
   template<typename Func>
@@ -106,7 +98,7 @@ public:
     insert(root, value);
   }
 
-  bool search(const T& value) const {
+  int search(const T& value) const {
     return search(root, value);
   }
 
@@ -116,10 +108,6 @@ public:
 
   bool isEmpty() const {
     return root == nullptr;
-  }
-
-  void printInOrder() const {
-    inorder(root);
   }
 
   template<typename Func>

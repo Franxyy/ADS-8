@@ -103,7 +103,7 @@ public:
   }
 
   int depth() const {
-    return depth(root);
+    return depth(root) - 1;
   }
 
   bool isEmpty() const {
